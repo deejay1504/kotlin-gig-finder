@@ -8,12 +8,18 @@ import org.springframework.gigfinder.gig.GigDetailsForm
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
+import com.google.gson.Gson
+
+
 
 @Service
 class GigService {
 
     @Autowired
     lateinit var appProperties: AppProperties
+
+    // Create this as a singleton
+    private val okHttpClient = OkHttpClient()
 
     fun createGigDetails(): GigDetailsForm {
         var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
@@ -28,28 +34,34 @@ class GigService {
     }
 
     fun getGigs(gigDetailsForm: GigDetailsForm): GigDetailsForm {
+
         var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
 
         var locationUrl = appProperties.songkickLocationUrl
         locationUrl = locationUrl.replace("param1", gigDetailsForm.currentLocation)
         locationUrl = locationUrl.replace("param2", appProperties.songkickApiKey)
 
-        val okHttpClient = OkHttpClient()
+        println("locationUrl " + locationUrl)
+
         val request = Request.Builder()
                 .get()
                 .url(locationUrl)
                 .build()
+
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                // Handle this
+                e.printStackTrace()
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val body = response.body
-                println("body " + body)
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    var b = response.body!!.string()
+                    println("body is " + b)
+                }
             }
         })
-
 
         return gigDetailsForm
     }
