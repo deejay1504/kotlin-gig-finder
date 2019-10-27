@@ -20,11 +20,8 @@ package org.springframework.gigfinder.gig
  */
 class GigDetailsForm {
 
-    var currentQuarter = 1
+    var currentLocation = "Brighton"
 
     var gigList: List<GigDetails>? = null
 
-    var totalGrossAmount = "%.2f".format(0.00)
-
-    var outputVat = "%.2f".format(0.00)
 }
