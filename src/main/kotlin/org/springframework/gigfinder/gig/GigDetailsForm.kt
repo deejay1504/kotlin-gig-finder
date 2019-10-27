@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.gigfinder.vat
+package org.springframework.gigfinder.gig
 
 /**
- * Simple domain object representing a list of vat items.
+ * Simple domain object representing a list of gig items.
  */
-class VatDetailsForm {
+class GigDetailsForm {
 
     var currentQuarter = 1
 
-    var vatList: List<Vat>? = null
+    var gigList: List<GigDetails>? = null
 
     var totalGrossAmount = "%.2f".format(0.00)
 

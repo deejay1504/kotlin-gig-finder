@@ -4,10 +4,10 @@
 
 <body>
 
-<h2>Vat Calculator</h2>
+<h2>Gig Finder</h2>
 
 
-<form th:object="${vatDetailsForm}" class="form-horizontal" id="add-owner-form" th:action="@{/vatcalc}" method="post">
+<form th:object="${gigDetailsForm}" class="form-horizontal" id="add-owner-form" th:action="@{/getgigs}" method="post">
 
     <select th:id="currentQuarterId" th:field="*{currentQuarter}" onchange="setCurrentQuarter();">
         <option th:value="1">Quarter 1</option>
@@ -25,53 +25,24 @@
                     <th class="text-center" width="16%">Number of Days</th>
                     <th class="text-center">Daily Rate (£)</th>
                     <th class="text-center">Net Amount (£)</th>
-                    <th class="text-center">VAT @ 20%</th>
+                    <th class="text-center">gig @ 20%</th>
                     <th class="text-center">Gross Amount (£)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="vat, itemStat : *{vatList}">
-                    <td><input th:id="'month' + ${itemStat.index}" th:field="*{vatList[__${itemStat.index}__].monthAndYear}" th:readonly="readonly" /></td>
+                <tr th:each="gig, itemStat : *{gigList}">
+                    <td><input th:id="'month' + ${itemStat.index}" th:field="*{gigList[__${itemStat.index}__].monthAndYear}" th:readonly="readonly" /></td>
                     <!-- Maximum value of 31 days -->
-                    <td><input th:field="*{vatList[__${itemStat.index}__].numberOfDays}" th:max="31" /></td>
-                    <td><input th:field="*{vatList[__${itemStat.index}__].dailyRate}" class="text-right" /></td>
-                    <td><input th:field="*{vatList[__${itemStat.index}__].netAmount}"   th:readonly="readonly" class="text-right" /></td>
-                    <td><input th:field="*{vatList[__${itemStat.index}__].vatAmount}"   th:readonly="readonly" class="text-right" /></td>
-                    <td><input th:field="*{vatList[__${itemStat.index}__].grossAmount}" th:readonly="readonly" class="text-right" /></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <table class="table">
-            <tbody>
-                <colgroup>
-                    <col style="width: 83%" />
-                    <col style="width: 17%" />
-                </colgroup>
-                <tr>
-                    <td class="text-right"><b>Net outputs (Box 6)</b></td>
-                    <td>
-                        <table>
-                            <tr>
-                                <td><b><input class="text-right" th:field="${vatDetailsForm.totalGrossAmount}" th:readonly="readonly" /></b></td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-right"><b>Output VAT 17.5% (Boxes 1 and 3)</b></td>
-                    <td>
-                        <table>
-                            <tr>
-                                <td><b><input class="text-right" th:field="${vatDetailsForm.outputVat}" th:readonly="readonly" /></b></td>
-                            </tr>
-                        </table>
-                    </td>
+                    <td><input th:field="*{gigList[__${itemStat.index}__].numberOfDays}" th:max="31" /></td>
+                    <td><input th:field="*{gigList[__${itemStat.index}__].dailyRate}" class="text-right" /></td>
+                    <td><input th:field="*{gigList[__${itemStat.index}__].netAmount}"   th:readonly="readonly" class="text-right" /></td>
+                    <td><input th:field="*{gigList[__${itemStat.index}__].gigAmount}"   th:readonly="readonly" class="text-right" /></td>
+                    <td><input th:field="*{gigList[__${itemStat.index}__].grossAmount}" th:readonly="readonly" class="text-right" /></td>
                 </tr>
             </tbody>
         </table>
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-default">Calculate</button>
+            <button type="submit" class="btn btn-default">Find gigs</button>
         </div>
     </div>
 </form>

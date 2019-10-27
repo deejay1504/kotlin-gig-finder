@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
-project.description = "VAT Calculator using Kotlin"
+project.description = "Kotlin gig finder using Songkick API"
 project.group = "org.springframework.samples"
 // Align with Spring Version
 project.version = "2.2.0.M4"

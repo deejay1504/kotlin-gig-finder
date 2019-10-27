@@ -1,4 +1,4 @@
-# VAT Calculator
+# Gig finder using Songkick API
 
 ## Technologies used
 

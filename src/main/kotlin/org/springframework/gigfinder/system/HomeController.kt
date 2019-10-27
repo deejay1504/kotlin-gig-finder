@@ -17,15 +17,15 @@ package org.springframework.gigfinder.system
 
 import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
-import org.springframework.gigfinder.service.VatService
-import org.springframework.gigfinder.vat.VatDetailsForm
+import org.springframework.gigfinder.service.GigService
+import org.springframework.gigfinder.gig.GigDetailsForm
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
-class HomeController(private val vatService: VatService) {
+class HomeController(private val vatService: GigService) {
 
-    val VIEWS_VAT_CALC__FORM = "vat/vatCalcForm"
+    val VIEWS_VAT_CALC__FORM = "gig/vatCalcForm"
 
     @GetMapping("/")
     fun welcome(model: MutableMap<String, Any>): String {
@@ -36,7 +36,7 @@ class HomeController(private val vatService: VatService) {
     }
 
     @PostMapping("/gigfinder")
-    fun vatCalculator(vatDetailsForm: VatDetailsForm, result: BindingResult, model: MutableMap<String, Any>): String {
+    fun vatCalculator(vatDetailsForm: GigDetailsForm, result: BindingResult, model: MutableMap<String, Any>): String {
 
         model["vatDetailsForm"] = vatService.calculateVat(vatDetailsForm)
 
