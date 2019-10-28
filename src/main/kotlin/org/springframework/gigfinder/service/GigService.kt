@@ -10,6 +10,8 @@ import org.springframework.gigfinder.gig.GigDetailsForm
 import org.springframework.gigfinder.model.location.Json4Kotlin_LocationBase
 import org.springframework.stereotype.Service
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -24,24 +26,18 @@ class GigService {
 
 
     fun createGigDetails(): GigDetailsForm {
-        var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
-        gigList.add(GigDetails())
-        gigList.add(GigDetails())
-        gigList.add(GigDetails())
 
         var gigDetailsForm = GigDetailsForm()
-        gigDetailsForm.gigList = gigList
+        gigDetailsForm.gigList = ArrayList<GigDetails>()
 
         return gigDetailsForm
     }
 
     fun getGigs(gigDetailsForm: GigDetailsForm): GigDetailsForm {
 
-        var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
-
         var metroAreaId = getMetroAreaIdFromCurrentLocation(gigDetailsForm.currentLocation)
 
-        getGigsFromMetroAreaId(metroAreaId)
+        gigDetailsForm.gigList = getGigsFromMetroAreaId(metroAreaId)
 
         return gigDetailsForm
 
@@ -71,10 +67,12 @@ class GigService {
         val jsonObj = Gson().fromJson(jsonAsString, Json4Kotlin_LocationBase::class.java)
 
         var metroAreaId = 0
-        for (location in jsonObj.resultsPage.results.location) {
-            if ("UK".equals(location.city.country.displayName)) {
-                metroAreaId = location.metroArea.id
-                break
+        if (jsonObj.resultsPage.totalEntries > 0) {
+            for (location in jsonObj.resultsPage.results.location) {
+                if ("UK".equals(location.city.country.displayName)) {
+                    metroAreaId = location.metroArea.id
+                    break
+                }
             }
         }
 
@@ -82,7 +80,7 @@ class GigService {
     }
 
 
-    fun getGigsFromMetroAreaId(metroAreaId: Int) {
+    fun getGigsFromMetroAreaId(metroAreaId: Int): ArrayList<GigDetails> {
         var metroAreaUrl = appProperties.songkickMetroAreaUrl
         metroAreaUrl = metroAreaUrl?.replace("param1", metroAreaId.toString())
         metroAreaUrl = metroAreaUrl?.replace("param2", appProperties.songkickApiKey)
@@ -104,12 +102,34 @@ class GigService {
         }
 
         println(jsonAsString)
+        var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
+
 
         val jsonObj = Gson().fromJson(jsonAsString, Json4Kotlin_Base::class.java)
+        val df = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
 
-        for (event in jsonObj.resultsPage.results.event) {
-            println(event.displayName)
+        if (jsonObj.resultsPage.totalEntries > 0) {
+            for (event in jsonObj.resultsPage.results.event) {
+                var gigDetails: GigDetails = GigDetails()
+
+                val artistName = StringBuilder()
+                val artistNameArray = event.displayName.split(" ")
+                var wordIndex = artistNameArray.indexOf("at") - 1
+                for (i in 0..wordIndex) {
+                    artistName.append(artistNameArray[i]).append(" ")
+                }
+
+                gigDetails.artist = artistName.toString().trim()
+                gigDetails.venue = event.venue.displayName
+                gigDetails.location = event.location.city
+                gigDetails.startDate = LocalDate.parse(event.start.date).format(df).toString()
+                gigDetails.startTime = event.start.time ?: "No time specified"
+
+                gigList.add(gigDetails)
+            }
         }
+
+        return gigList
 
     }
 

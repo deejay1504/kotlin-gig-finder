@@ -11,6 +11,9 @@
 
     <div>
         <label>Current location</label><input th:field="*{currentLocation}" />
+        <div th:if="*{not gigList.empty}">
+            <button type="submit" class="btn btn-default">Find gigs</button>
+        </div>
     </div>
 
     <br/><br/>
@@ -18,20 +21,23 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th class="text-center">Artist</th>
-                    <th class="text-center">Venue</th>
-                    <th class="text-center">Location</th>
-                    <th class="text-center">Gig Date</th>
-                    <th class="text-center">Start Time</th>
+                    <th>Artist</th>
+                    <th>Venue</th>
+                    <th>Location</th>
+                    <th>Gig Date</th>
+                    <th>Start Time</th>
                 </tr>
             </thead>
             <tbody>
+                <tr th:if="*{gigList.empty}">
+                    <td>No gigs found</td>
+                </tr>
                 <tr th:each="gig, itemStat : *{gigList}">
-                    <td><input th:field="*{gigList[__${itemStat.index}__].artist}"    /></td>
-                    <td><input th:field="*{gigList[__${itemStat.index}__].venue}"     /></td>
-                    <td><input th:field="*{gigList[__${itemStat.index}__].location}"  /></td>
-                    <td><input th:field="*{gigList[__${itemStat.index}__].startDate}" /></td>
-                    <td><input th:field="*{gigList[__${itemStat.index}__].startTime}"  /></td>
+                    <td><input style="width: 440px" th:field="*{gigList[__${itemStat.index}__].artist}"    th:readonly="readonly" /></td>
+                    <td><input style="width: 290px" th:field="*{gigList[__${itemStat.index}__].venue}"     th:readonly="readonly" /></td>
+                    <td><input style="width: 170px" th:field="*{gigList[__${itemStat.index}__].location}"  th:readonly="readonly" /></td>
+                    <td><input style="width: 100px" th:field="*{gigList[__${itemStat.index}__].startDate}" th:readonly="readonly" /></td>
+                    <td><input style="width: 125px" th:field="*{gigList[__${itemStat.index}__].startTime}" th:readonly="readonly" /></td>
                 </tr>
             </tbody>
         </table>
