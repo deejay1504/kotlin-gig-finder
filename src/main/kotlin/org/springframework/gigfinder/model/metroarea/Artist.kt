@@ -15,7 +15,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 data class Artist (
 
         @SerializedName("id") val id : Int,
-        @SerializedName("uri") val uri : String,
         @SerializedName("displayName") val displayName : String,
-        @SerializedName("identifier") val identifier : List<String>
+        @SerializedName("uri") val uri : String,
+        @SerializedName("identifier") val identifier : List<Identifier>
 )

@@ -17,7 +17,7 @@ data class Venue (
         @SerializedName("id") val id : Int,
         @SerializedName("displayName") val displayName : String,
         @SerializedName("uri") val uri : String,
-        @SerializedName("lng") val lng : Double,
+        @SerializedName("metroArea") val metroArea : MetroArea,
         @SerializedName("lat") val lat : Double,
-        @SerializedName("metroArea") val metroArea : MetroArea
+        @SerializedName("lng") val lng : Double
 )

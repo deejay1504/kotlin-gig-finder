@@ -14,9 +14,8 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 data class MetroArea (
 
-	@SerializedName("id") val id : Int,
-	@SerializedName("uri") val uri : String,
-	@SerializedName("displayName") val displayName : String,
-	@SerializedName("country") val country : Country,
-	@SerializedName("state") val state : State
+        @SerializedName("displayName") val displayName : String,
+        @SerializedName("country") val country : Country,
+        @SerializedName("id") val id : Int,
+        @SerializedName("uri") val uri : String
 )

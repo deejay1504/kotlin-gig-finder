@@ -15,13 +15,15 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 data class Event (
 
         @SerializedName("id") val id : Int,
+        @SerializedName("displayName") val displayName : String,
         @SerializedName("type") val type : String,
         @SerializedName("uri") val uri : String,
-        @SerializedName("displayName") val displayName : String,
+        @SerializedName("status") val status : String,
+        @SerializedName("popularity") val popularity : Double,
         @SerializedName("start") val start : Start,
         @SerializedName("performance") val performance : List<Performance>,
-        @SerializedName("location") val location : Location,
+        @SerializedName("ageRestriction") val ageRestriction : String,
+        @SerializedName("flaggedAsEnded") val flaggedAsEnded : Boolean,
         @SerializedName("venue") val venue : Venue,
-        @SerializedName("status") val status : String,
-        @SerializedName("popularity") val popularity : Double
+        @SerializedName("location") val location : Location
 )

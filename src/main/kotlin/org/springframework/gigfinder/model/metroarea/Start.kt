@@ -14,7 +14,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 data class Start (
 
-	@SerializedName("time") val time : String,
-	@SerializedName("date") val date : String,
-	@SerializedName("datetime") val datetime : String
+        @SerializedName("date") val date : String,
+        @SerializedName("datetime") val datetime : String,
+        @SerializedName("time") val time : String
 )

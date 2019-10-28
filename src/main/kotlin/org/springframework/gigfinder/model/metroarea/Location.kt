@@ -15,6 +15,6 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 data class Location (
 
         @SerializedName("city") val city : String,
-        @SerializedName("lng") val lng : Double,
-        @SerializedName("lat") val lat : Double
+        @SerializedName("lat") val lat : Double,
+        @SerializedName("lng") val lng : Double
 )

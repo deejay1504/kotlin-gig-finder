@@ -14,9 +14,9 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 data class Performance (
 
-        @SerializedName("artist") val artist : Artist,
         @SerializedName("id") val id : Int,
         @SerializedName("displayName") val displayName : String,
+        @SerializedName("billing") val billing : String,
         @SerializedName("billingIndex") val billingIndex : Int,
-        @SerializedName("billing") val billing : String
+        @SerializedName("artist") val artist : Artist
 )

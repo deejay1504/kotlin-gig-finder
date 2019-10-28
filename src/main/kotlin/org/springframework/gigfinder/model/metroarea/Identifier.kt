@@ -12,11 +12,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class ResultsPage (
+data class Identifier (
 
-        @SerializedName("status") val status : String,
-        @SerializedName("results") val results : Results,
-        @SerializedName("perPage") val perPage : Int,
-        @SerializedName("page") val page : Int,
-        @SerializedName("totalEntries") val totalEntries : Int
+	@SerializedName("mbid") val mbid : String,
+	@SerializedName("href") val href : String
 )
