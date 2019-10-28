@@ -1,5 +1,6 @@
 package org.springframework.gigfinder.service
 
+import Json4Kotlin_Base
 import okhttp3.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -9,7 +10,8 @@ import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
 import com.google.gson.Gson
-
+import com.google.gson.JsonArray
+import sun.security.jgss.GSSUtil.login
 
 
 @Service
@@ -20,6 +22,7 @@ class GigService {
 
     // Create this as a singleton
     private val okHttpClient = OkHttpClient()
+
 
     fun createGigDetails(): GigDetailsForm {
         var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
@@ -48,32 +51,22 @@ class GigService {
                 .url(locationUrl)
                 .build()
 
-        okHttpClient.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
+        var jsonAsString = ""
+
+        val response = okHttpClient.newCall(request).execute()
+        response.use {
+            if (!response.isSuccessful) {
+                throw IOException("Unexpected code $response")
             }
 
-            override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+            jsonAsString = response.body!!.string()
+        }
 
-                    var b = response.body!!.string()
-                    println("body is " + b)
-                }
-            }
-        })
+        println("body is " + jsonAsString)
+        val topic = Gson().fromJson(jsonAsString, Json4Kotlin_Base::class.java)
+        println("topic is " + topic)
 
         return gigDetailsForm
     }
-
-//    fun getResponseWithGet(url: String?) : String
-//    {
-//
-//        val request = Request.Builder()
-//                .url(url)
-//                .build()
-//
-//        return getOkHttpClient(request)
-//    }
 
 }
