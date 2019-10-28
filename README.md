@@ -10,6 +10,7 @@
 * Templates: Thymeleaf and Bootstrap
 * Build: Gradle Script with the Kotlin DSL
 * Testing: Junit 5, Mockito
+* json2kotlin for generating Kotlin data model classes from a JSON object
 
 ### To run on gradle command line
 

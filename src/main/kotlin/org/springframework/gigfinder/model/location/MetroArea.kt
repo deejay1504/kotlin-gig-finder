@@ -1,3 +1,5 @@
+package org.springframework.gigfinder.model.location
+
 import com.google.gson.annotations.SerializedName
 
 /*

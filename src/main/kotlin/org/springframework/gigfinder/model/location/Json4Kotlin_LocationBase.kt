@@ -14,10 +14,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class City (
+data class Json4Kotlin_LocationBase (
 
-        @SerializedName("displayName") val displayName : String,
-        @SerializedName("country") val country : Country,
-        @SerializedName("lng") val lng : Double,
-        @SerializedName("lat") val lat : Double
+	@SerializedName("resultsPage") val resultsPage : ResultsPage
 )

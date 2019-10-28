@@ -1,5 +1,3 @@
-package org.springframework.gigfinder.model.location
-
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -14,10 +12,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class City (
+data class Event (
 
+        @SerializedName("id") val id : Int,
+        @SerializedName("type") val type : String,
+        @SerializedName("uri") val uri : String,
         @SerializedName("displayName") val displayName : String,
-        @SerializedName("country") val country : Country,
-        @SerializedName("lng") val lng : Double,
-        @SerializedName("lat") val lat : Double
+        @SerializedName("start") val start : Start,
+        @SerializedName("performance") val performance : List<Performance>,
+        @SerializedName("location") val location : Location,
+        @SerializedName("venue") val venue : Venue,
+        @SerializedName("status") val status : String,
+        @SerializedName("popularity") val popularity : Double
 )

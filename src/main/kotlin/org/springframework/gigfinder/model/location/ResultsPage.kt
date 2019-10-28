@@ -1,3 +1,5 @@
+package org.springframework.gigfinder.model.location
+
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -19,4 +21,5 @@ data class ResultsPage (
         @SerializedName("perPage") val perPage : Int,
         @SerializedName("page") val page : Int,
         @SerializedName("status") val status : String
+
 )

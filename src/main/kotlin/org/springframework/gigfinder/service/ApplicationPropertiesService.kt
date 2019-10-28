@@ -10,6 +10,9 @@ class AppProperties {
     lateinit var songkickApiKey: String
 
     @Value("\${songkick.location.url}")
-    lateinit var songkickLocationUrl: String
+    var songkickLocationUrl: String? = null
+
+    @Value("\${songkick.metro.area.url}")
+    var songkickMetroAreaUrl: String? = null
 
 }
