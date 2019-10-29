@@ -8,14 +8,16 @@
         $("#dateHeading").text(greeting);
 
         $("#gigStartDate").datepicker({
-            dateFormat: "dd-mm-yy"
+            dateFormat: "dd-mm-yy",
+            showButtonPanel: true
         });
-        $("#gigStartDate").datepicker("setDate", "0");
+        //$("#gigStartDate").datepicker("setDate", "0");
 
         $("#gigEndDate").datepicker({
-            dateFormat: "dd-mm-yy"
+            dateFormat: "dd-mm-yy",
+            showButtonPanel: true
         });
-        $("#gigEndDate").datepicker("setDate", "7");
+        //$("#gigEndDate").datepicker("setDate", "7");
 
     }
 
@@ -59,7 +61,8 @@
         if (startDate > endDate) {
             $("#findGigsButton1").hide();
             $("#findGigsButton2").hide();
-            $("#error").html("Start date cannot be greater than end date");
+            $("#modal-hdr-msg").html("Warning");
+            $("#errorMsg").html("Start date cannot be greater than end date");
             $('#myModal').modal("show");
         }
     }

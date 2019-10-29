@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!doctype html>
 
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 
@@ -63,12 +63,12 @@
 
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header alert-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h3 id="modal-hdr-msg" class="modal-title"></h3>
                 </div>
                 <div class="modal-body">
-                    <p id="error"></p>
+                    <h4 id="errorMsg"></h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

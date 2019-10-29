@@ -7063,3 +7063,6 @@ hr {
     padding-left: 140px;
     color: #FFFFFF;
 }
+.modal-header {
+    background: #FFFF00;
+}

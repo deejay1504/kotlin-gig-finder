@@ -37,7 +37,7 @@ class GigService {
 
         var metroAreaId = getMetroAreaIdFromCurrentLocation(gigDetailsForm.gigLocation)
 
-        gigDetailsForm.gigList = getGigsFromMetroAreaId(metroAreaId)
+        gigDetailsForm.gigList = getGigsFromMetroAreaId(metroAreaId, gigDetailsForm.gigStartDate, gigDetailsForm.gigEndDate)
 
         return gigDetailsForm
 
@@ -80,10 +80,14 @@ class GigService {
     }
 
 
-    fun getGigsFromMetroAreaId(metroAreaId: Int): ArrayList<GigDetails> {
+    fun getGigsFromMetroAreaId(metroAreaId: Int, gigStartDate: String, gigEndDate: String): ArrayList<GigDetails> {
+        var startDate = gigStartDate.substring(6) + "-" + gigStartDate.substring(3,5) + "-" + gigStartDate.substring(0,2)
+        var endDate   = gigEndDate.substring(6) + "-" + gigEndDate.substring(3,5) + "-" + gigEndDate.substring(0,2)
         var metroAreaUrl = appProperties.songkickMetroAreaUrl
         metroAreaUrl = metroAreaUrl?.replace("param1", metroAreaId.toString())
         metroAreaUrl = metroAreaUrl?.replace("param2", appProperties.songkickApiKey)
+        metroAreaUrl = metroAreaUrl?.replace("param3", startDate)
+        metroAreaUrl = metroAreaUrl?.replace("param4", endDate)
 
         val request = Request.Builder()
                 .get()
