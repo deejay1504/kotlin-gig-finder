@@ -5,8 +5,18 @@
 
     window.onload = function() {
         var greeting =  getTodaysDate() + ' - ' + getGreeting() + "!";
-        $('#dateHeading').text(greeting);
-        setCurrentQuarter();
+        $("#dateHeading").text(greeting);
+
+        $("#startDate").datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+        $("#startDate").datepicker("setDate", "0");
+
+        $("#endDate").datepicker({
+            dateFormat: "dd-mm-yy",
+        });
+        $("#endDate").datepicker("setDate", "7");
+
     }
 
 
@@ -20,7 +30,7 @@
         + ' ' + today.getFullYear() + ' - ' + today.getHours() + ':' + minutes;
     }
 
-    function getGreeting(){
+    function getGreeting() {
         var data = [
                 [0,   4, "Good Night"],
                 [5,  11, "Good Morning"],
@@ -37,30 +47,11 @@
         }
     }
 
-    function setCurrentQuarter() {
-        var currentQuarter = $("#currentQuarterId").val();
-        var today = new Date();
-        var year = today.getFullYear();
-        var startMonth = 0;
-        var endMonth   = 2;
-        if (currentQuarter == 2) {
-            startMonth = 3;
-            endMonth   = 5;
-        } else if (currentQuarter == 3) {
-            startMonth = 6;
-            endMonth   = 8;
-        } else if (currentQuarter == 4) {
-            startMonth = 9;
-            endMonth   = 11;
-        }
-        var month = new Array(3);
-        var pos = 0;
-        for (i = startMonth; i <= endMonth; i++) {
-            month[pos] = monthlist[i] + ' ' + year;
-            pos++;
-        }
-        for (i = 0; i < 3; i++) {
-           $("#month" + i).val(month[i]);
+    function validateDate() {
+        var startDate = newDate($("#startDate").val());
+        var endDate   = newDate($("#endDate").val());
+        if (startdate < endDate) {
+            alert('invalid');
         }
     }
 

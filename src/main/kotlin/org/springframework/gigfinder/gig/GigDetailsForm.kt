@@ -20,7 +20,11 @@ package org.springframework.gigfinder.gig
  */
 class GigDetailsForm {
 
-    var currentLocation = "Brighton"
+    var gigLocation = "Brighton"
+
+    var startDate = ""
+
+    var endDate = ""
 
     var gigList: List<GigDetails>? = null
 

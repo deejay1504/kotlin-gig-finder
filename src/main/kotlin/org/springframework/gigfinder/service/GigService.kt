@@ -35,7 +35,7 @@ class GigService {
 
     fun getGigs(gigDetailsForm: GigDetailsForm): GigDetailsForm {
 
-        var metroAreaId = getMetroAreaIdFromCurrentLocation(gigDetailsForm.currentLocation)
+        var metroAreaId = getMetroAreaIdFromCurrentLocation(gigDetailsForm.gigLocation)
 
         gigDetailsForm.gigList = getGigsFromMetroAreaId(metroAreaId)
 
@@ -43,9 +43,9 @@ class GigService {
 
     }
 
-    fun getMetroAreaIdFromCurrentLocation(currentLocation: String): Int {
+    fun getMetroAreaIdFromCurrentLocation(gigLocation: String): Int {
         var locationUrl = appProperties.songkickLocationUrl
-        locationUrl = locationUrl?.replace("param1", currentLocation)
+        locationUrl = locationUrl?.replace("param1", gigLocation)
         locationUrl = locationUrl?.replace("param2", appProperties.songkickApiKey)
 
         val request = Request.Builder()

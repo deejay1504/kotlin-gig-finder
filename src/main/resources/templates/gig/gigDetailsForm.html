@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 
@@ -10,7 +10,21 @@
 <form th:object="${gigDetailsForm}" class="form-horizontal" id="add-owner-form" th:action="@{/gigfinder}" method="post">
 
     <div>
+        <table>
+            <tr>
+                <td style="width: 140px"><label>Gig location:</label></td>
+                <td style="width: 230px"><input th:field="*{gigLocation}" /></td>
+                <td style="width: 95px"><label>Start Date:</label></td>
+                <td style="width: 230px"><input type="text" id="startDate" th:field="*{startDate}" onchange="validateDate();"/></td>
+                <td style="width: 95px"><label>End Date:</label></td>
+                <td style="width: 200px"><input type="text" id="endDate" th:field="*{endDate}" onchange="validateDate();"/></td>
+            </tr>
+        </table>
+        <!--
         <label>Current location</label>&nbsp;&nbsp;<input th:field="*{currentLocation}" />
+        <label>Start Date:</label>&nbsp;&nbsp;<input type="text" id="startDate">
+        <label>End Date:</label>&nbsp;&nbsp;<input type="text" id="endDate">
+        -->
         <div th:if="*{not gigList.empty}">
             <button type="submit" class="btn btn-default">Find gigs</button>
         </div>
