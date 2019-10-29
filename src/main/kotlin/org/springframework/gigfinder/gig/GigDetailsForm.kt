@@ -22,9 +22,9 @@ class GigDetailsForm {
 
     var gigLocation = "Brighton"
 
-    var startDate = ""
+    var gigStartDate = ""
 
-    var endDate = ""
+    var gigEndDate = ""
 
     var gigList: List<GigDetails>? = null
 

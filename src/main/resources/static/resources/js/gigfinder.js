@@ -7,15 +7,15 @@
         var greeting =  getTodaysDate() + ' - ' + getGreeting() + "!";
         $("#dateHeading").text(greeting);
 
-        $("#startDate").datepicker({
+        $("#gigStartDate").datepicker({
             dateFormat: "dd-mm-yy"
         });
-        $("#startDate").datepicker("setDate", "0");
+        $("#gigStartDate").datepicker("setDate", "0");
 
-        $("#endDate").datepicker({
-            dateFormat: "dd-mm-yy",
+        $("#gigEndDate").datepicker({
+            dateFormat: "dd-mm-yy"
         });
-        $("#endDate").datepicker("setDate", "7");
+        $("#gigEndDate").datepicker("setDate", "7");
 
     }
 
@@ -48,11 +48,27 @@
     }
 
     function validateDate() {
-        var startDate = newDate($("#startDate").val());
-        var endDate   = newDate($("#endDate").val());
-        if (startdate < endDate) {
-            alert('invalid');
+        $("#findGigsButton1").show();
+        $("#findGigsButton2").show();
+
+        var revStartDate = reverseDate($("#gigStartDate").val());
+        var revEndDate   = reverseDate($("#gigEndDate").val());
+        var startDate    = Date.parse(revStartDate);
+        var endDate      = Date.parse(revEndDate);
+
+        if (startDate > endDate) {
+            $("#findGigsButton1").hide();
+            $("#findGigsButton2").hide();
+            $("#error").html("Start date cannot be greater than end date");
+            $('#myModal').modal("show");
         }
+    }
+
+    function reverseDate(dt) {
+        var dd = dt.substring(0,2);
+        var mm = dt.substring(3,5);
+        var yy = dt.substring(6);
+        return yy + "-" + mm + "-" + dd;
     }
 
 //]]>
