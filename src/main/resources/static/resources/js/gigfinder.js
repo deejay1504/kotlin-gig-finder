@@ -74,4 +74,9 @@
         return yy + "-" + mm + "-" + dd;
     }
 
+    function submitForm(href) {
+        $("#currentPage").val(href.innerText);
+        $("#gigDetailsForm").submit();
+    }
+
 //]]>

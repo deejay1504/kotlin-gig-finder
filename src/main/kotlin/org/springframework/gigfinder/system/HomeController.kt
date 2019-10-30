@@ -29,4 +29,5 @@ class HomeController(private val gigService: GigService) {
 
         return VIEWS_GIG_DETAILS_FORM
     }
+
 }

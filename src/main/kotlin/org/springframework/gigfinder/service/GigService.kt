@@ -35,11 +35,15 @@ class GigService {
 
     fun getGigs(gigDetailsForm: GigDetailsForm): GigDetailsForm {
 
-        var metroAreaId = getMetroAreaIdFromCurrentLocation(gigDetailsForm.gigLocation)
+        var metroAreaId = gigDetailsForm.metroAreaId
 
-        gigDetailsForm.gigList = getGigsFromMetroAreaId(metroAreaId, gigDetailsForm.gigStartDate, gigDetailsForm.gigEndDate)
+        if (metroAreaId == 0) {
+            metroAreaId = getMetroAreaIdFromCurrentLocation(gigDetailsForm.gigLocation)
+        }
 
-        return gigDetailsForm
+        var returnedGigDetailsForm = getGigsFromMetroAreaId(metroAreaId, gigDetailsForm)
+
+        return returnedGigDetailsForm
 
     }
 
@@ -80,7 +84,9 @@ class GigService {
     }
 
 
-    fun getGigsFromMetroAreaId(metroAreaId: Int, gigStartDate: String, gigEndDate: String): ArrayList<GigDetails> {
+    fun getGigsFromMetroAreaId(metroAreaId: Int, gigDetailsForm: GigDetailsForm): GigDetailsForm {
+        var gigStartDate = gigDetailsForm.gigStartDate
+        var gigEndDate = gigDetailsForm.gigEndDate
         var startDate = gigStartDate.substring(6) + "-" + gigStartDate.substring(3,5) + "-" + gigStartDate.substring(0,2)
         var endDate   = gigEndDate.substring(6) + "-" + gigEndDate.substring(3,5) + "-" + gigEndDate.substring(0,2)
         var metroAreaUrl = appProperties.songkickMetroAreaUrl
@@ -88,6 +94,7 @@ class GigService {
         metroAreaUrl = metroAreaUrl?.replace("param2", appProperties.songkickApiKey)
         metroAreaUrl = metroAreaUrl?.replace("param3", startDate)
         metroAreaUrl = metroAreaUrl?.replace("param4", endDate)
+        metroAreaUrl = metroAreaUrl?.replace("param5", gigDetailsForm.currentPage.toString())
 
         val request = Request.Builder()
                 .get()
@@ -105,14 +112,21 @@ class GigService {
             jsonAsString = response.body!!.string()
         }
 
+        println(request)
         println(jsonAsString)
         var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
-
 
         val jsonObj = Gson().fromJson(jsonAsString, Json4Kotlin_Base::class.java)
         val df = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
 
         if (jsonObj.resultsPage.totalEntries > 0) {
+            gigDetailsForm.totalEntries = jsonObj.resultsPage.totalEntries
+            gigDetailsForm.currentPage = jsonObj.resultsPage.page
+            gigDetailsForm.numberOfPages = gigDetailsForm.totalEntries / 20
+            var extraPage = gigDetailsForm.totalEntries % 20
+            if (extraPage > 0) {
+                gigDetailsForm.numberOfPages = gigDetailsForm.numberOfPages + 1
+            }
             for (event in jsonObj.resultsPage.results.event) {
                 var gigDetails: GigDetails = GigDetails()
 
@@ -135,9 +149,17 @@ class GigService {
 
                 gigList.add(gigDetails)
             }
+            var pageNumbers: ArrayList<Int> = ArrayList<Int>()
+            for (pageNo in 1 ..gigDetailsForm.numberOfPages) {
+                pageNumbers.add(pageNo)
+            }
+            gigDetailsForm.pageNumbers = pageNumbers
         }
 
-        return gigList
+        gigDetailsForm.gigList = gigList
+        gigDetailsForm.metroAreaId = metroAreaId
+
+        return gigDetailsForm
 
     }
 

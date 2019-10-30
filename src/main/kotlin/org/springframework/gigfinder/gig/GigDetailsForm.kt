@@ -15,9 +15,6 @@
  */
 package org.springframework.gigfinder.gig
 
-/**
- * Simple domain object representing a list of gig items.
- */
 class GigDetailsForm {
 
     var gigLocation = "Brighton"
@@ -26,6 +23,16 @@ class GigDetailsForm {
 
     var gigEndDate = ""
 
+    var metroAreaId = 0
+
+    var totalEntries = 0
+
+    var currentPage = 0
+
+    var numberOfPages = 0
+
     var gigList: List<GigDetails>? = null
+
+    var pageNumbers: List<Int> = emptyList()
 
 }
