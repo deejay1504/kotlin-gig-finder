@@ -147,6 +147,7 @@ class GigService {
                 gigDetails.location = event.location.city
                 gigDetails.startDate = LocalDate.parse(event.start.date).format(df).toString()
                 gigDetails.startTime = startTime
+                gigDetails.songkickUrl = event.uri
 
                 gigList.add(gigDetails)
             }

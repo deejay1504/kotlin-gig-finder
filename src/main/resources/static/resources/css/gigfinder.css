@@ -7077,6 +7077,8 @@ hr {
 }
 .artist-field {
     width: 440px;
+    color: #000000;
+    font-weight: bold;
 }
 .venue-field {
     width: 290px;

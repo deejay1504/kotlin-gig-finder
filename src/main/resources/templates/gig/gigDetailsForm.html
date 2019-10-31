@@ -71,7 +71,11 @@
             </thead>
             <tbody>
                 <tr th:each="gig, itemStat : *{gigList}">
-                    <td><label class="artist-field"     th:text="*{gigList[__${itemStat.index}__].artist}"   ></label></td>
+                    <td>
+                        <a class="artist-field" th:href="*{gigList[__${itemStat.index}__].songkickUrl}"
+                           th:text="*{gigList[__${itemStat.index}__].artist}" target="_blank">
+                        </a>
+                    </td>
                     <td><label class="venue-field"      th:text="*{gigList[__${itemStat.index}__].venue}"    ></label></td>
                     <td><label class="location-field"   th:text="*{gigList[__${itemStat.index}__].location}" ></label></td>
                     <td><label class="start-date-field" th:text="*{gigList[__${itemStat.index}__].startDate}"></label></td>

@@ -12,6 +12,8 @@ class GigDetails () {
 
     var startDate = ""
 
+    var songkickUrl = ""
+
     // Start time could be null so define as String?
     var startTime: String? = ""
 
