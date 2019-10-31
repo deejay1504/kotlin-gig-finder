@@ -13,7 +13,7 @@
         <table>
             <tr>
                 <td class="gig-hdr"><label>Gig location:</label></td>
-                <td class="gig-location"><input th:field="*{gigLocation}" /></td>
+                <td class="gig-location"><input id="gigLocation" th:field="*{gigLocation}" onchange="resetMetroAreaId();"/></td>
                 <td class="start-date-hdr"><label>Start Date:</label></td>
                 <td class="start-date-msg"><input type="text" id="gigStartDate" th:field="*{gigStartDate}" /></td>
                 <td class="end-date-hdr"><label>End Date:</label></td>
@@ -26,7 +26,7 @@
         <div>
             <div th:if="*{not gigList.empty}" class="side-by-side">
                 <br/>
-                <button id="findGigsButton1" type="submit" class="btn btn-default" onclick="validateDate(event);">Find gigs</button>
+                <button id="findGigsButton1" type="submit" class="btn btn-default" onclick="validateForm(event);">Find gigs</button>
             </div>
 
             <div th:if="${gigDetailsForm.totalEntries > 0}" class="side-by-side">
@@ -96,7 +96,7 @@
             <div>
                 <div class="side-by-side">
                     <br/>
-                    <button id="findGigsButton2" type="submit" class="btn btn-default" onclick="validateDate(event);">Find gigs</button>
+                    <button id="findGigsButton2" type="submit" class="btn btn-default" onclick="validateForm(event);">Find gigs</button>
                 </div>
 
                 <div th:if="${gigDetailsForm.totalEntries > 0}" class="side-by-side">

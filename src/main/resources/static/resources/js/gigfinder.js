@@ -20,7 +20,7 @@
         });
 
         if ($("#noRecordsFound").val()) {
-            showAlert(event, "modal-header-warning", "No gigs found on the specified dates");
+            showAlert(event, "modal-header-warning", "No gigs found for the specified information");
         }
     }
 
@@ -52,9 +52,15 @@
         }
     }
 
-    function validateDate(event) {
-        var sDate = $("#gigStartDate").val();
-        var eDate = $("#gigEndDate").val();
+    function validateForm(event) {
+        var gigLocation  = $("#gigLocation").val();
+        if (gigLocation == '') {
+            showAlert(event, "modal-header-error", "Location cannot be empty")
+            return false;
+        }
+
+        var sDate        = $("#gigStartDate").val();
+        var eDate        = $("#gigEndDate").val();
         var revStartDate = reverseDate(sDate);
         var revEndDate   = reverseDate(eDate);
 
@@ -94,6 +100,12 @@
         $('#myModal').modal("show");
         event.preventDefault();
         return false;
+    }
+
+    // If we change location, set metro area id to 0 to force
+    // it to be looked up again for the new location
+    function resetMetroAreaId() {
+        $("#metroAreaId").val(0);
     }
 
 //]]>

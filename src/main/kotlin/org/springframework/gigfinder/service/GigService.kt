@@ -115,6 +115,7 @@ class GigService {
         println(request)
         println(jsonAsString)
         var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
+        var sortedGigList: List<GigDetails> = ArrayList<GigDetails>()
 
         val jsonObj = Gson().fromJson(jsonAsString, Json4Kotlin_Base::class.java)
         val df = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
@@ -154,9 +155,11 @@ class GigService {
                 pageNumbers.add(pageNo)
             }
             gigDetailsForm.pageNumbers = pageNumbers
+
+            sortedGigList = gigList.sortedWith(compareBy({it.startDate}, {it.artist}))
         }
 
-        gigDetailsForm.gigList = gigList
+        gigDetailsForm.gigList = sortedGigList
         gigDetailsForm.metroAreaId = metroAreaId
 
         return gigDetailsForm
