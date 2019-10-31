@@ -9,16 +9,19 @@
 
         $("#gigStartDate").datepicker({
             dateFormat: "dd-mm-yy",
+            minDate: new Date(),
             showButtonPanel: true
         });
-        //$("#gigStartDate").datepicker("setDate", "0");
 
         $("#gigEndDate").datepicker({
             dateFormat: "dd-mm-yy",
+            minDate: new Date(),
             showButtonPanel: true
         });
-        //$("#gigEndDate").datepicker("setDate", "7");
 
+        if ($("#noRecordsFound").val()) {
+            showAlert(event, "modal-header-warning", "No gigs found on the specified dates");
+        }
     }
 
 
@@ -49,21 +52,21 @@
         }
     }
 
-    function validateDate() {
-        $("#findGigsButton1").show();
-        $("#findGigsButton2").show();
+    function validateDate(event) {
+        var sDate = $("#gigStartDate").val();
+        var eDate = $("#gigEndDate").val();
+        var revStartDate = reverseDate(sDate);
+        var revEndDate   = reverseDate(eDate);
 
-        var revStartDate = reverseDate($("#gigStartDate").val());
-        var revEndDate   = reverseDate($("#gigEndDate").val());
-        var startDate    = Date.parse(revStartDate);
-        var endDate      = Date.parse(revEndDate);
+        if (sDate == '' || eDate == '') {
+            showAlert(event, "modal-header-error", "Date cannot be empty")
+        } else {
+            var startDate = Date.parse(revStartDate);
+            var endDate   = Date.parse(revEndDate);
 
-        if (startDate > endDate) {
-            $("#findGigsButton1").hide();
-            $("#findGigsButton2").hide();
-            $("#modal-hdr-msg").html("Warning");
-            $("#errorMsg").html("Start date cannot be greater than end date");
-            $('#myModal').modal("show");
+            if (startDate > endDate) {
+                showAlert(event, "modal-header-warning", "Start date cannot be greater than end date")
+            }
         }
     }
 
@@ -77,6 +80,20 @@
     function submitForm(href) {
         $("#currentPage").val(href.innerText);
         $("#gigDetailsForm").submit();
+    }
+
+    function showAlert(event, headerClassToAdd, mainMsg) {
+        var hdrMsg = (headerClassToAdd.indexOf("error") >= 0) ? "Error" : "Warning"
+        $("#modal-hdr").removeClass("alert-primary");
+        $("#modal-hdr").removeClass("modal-header-error");
+        $("#modal-hdr").removeClass("modal-header-warning");
+        $("#modal-hdr").addClass("alert-primary");
+        $("#modal-hdr").addClass(headerClassToAdd);
+        $("#modal-hdr-msg").html(hdrMsg);
+        $("#errorMsg").html(mainMsg);
+        $('#myModal').modal("show");
+        event.preventDefault();
+        return false;
     }
 
 //]]>

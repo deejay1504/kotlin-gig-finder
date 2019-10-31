@@ -18,7 +18,6 @@ class HomeController(private val gigService: GigService) {
 
         model["gigDetailsForm"] = gigService.createGigDetails()
 
-
         return VIEWS_GIG_DETAILS_FORM
     }
 
@@ -26,6 +25,8 @@ class HomeController(private val gigService: GigService) {
     fun getGigs(gigDetailsForm: GigDetailsForm, result: BindingResult, model: MutableMap<String, Any>): String {
 
         model["gigDetailsForm"] = gigService.getGigs(gigDetailsForm)
+
+        model["noRecordsFound"] = (gigDetailsForm.totalEntries == 0)
 
         return VIEWS_GIG_DETAILS_FORM
     }

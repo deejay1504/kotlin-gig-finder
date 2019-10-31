@@ -7063,11 +7063,14 @@ hr {
     padding-left: 140px;
     color: #FFFFFF;
 }
-.modal-header {
+.modal-header-warning {
     background: #FFFF00;
 }
+.modal-header-error {
+    background: #FF0000;
+}
 .active-page {
-    background: #FFFF00;
+    background: #FFD700;
 }
 .side-by-side {
     display: inline-block;
