@@ -7075,3 +7075,39 @@ hr {
 .side-by-side {
     display: inline-block;
 }
+.artist-field {
+    width: 440px;
+}
+.venue-field {
+    width: 290px;
+}
+.location-field {
+    width: 170px;
+}
+.start-date-field {
+    width: 110px;
+}
+.end-date-field {
+    width: 140px;
+}
+.total-entries {
+    width: 45px
+}
+.gig-hdr {
+    width: 140px
+}
+.gig-location {
+    width: 230px
+}
+.start-date-hdr {
+    width: 95px
+}
+.start-date-msg {
+    width: 230px
+}
+.end-date-hdr {
+    width: 95px
+}
+.end-date-msg {
+    width: 200px
+}
