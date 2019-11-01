@@ -29,6 +29,8 @@ class GigDetailsForm {
 
     var currentPage = 0
 
+    var resultsPerPage = 20
+
     var numberOfPages = 0
 
     var gigList: List<GigDetails>? = null

@@ -13,6 +13,7 @@ import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 
 @Service
@@ -89,16 +90,25 @@ class GigService {
         var gigEndDate = gigDetailsForm.gigEndDate
         var startDate = gigStartDate.substring(6) + "-" + gigStartDate.substring(3,5) + "-" + gigStartDate.substring(0,2)
         var endDate   = gigEndDate.substring(6) + "-" + gigEndDate.substring(3,5) + "-" + gigEndDate.substring(0,2)
-        var metroAreaUrl = appProperties.songkickMetroAreaUrl
-        metroAreaUrl = metroAreaUrl?.replace("param1", metroAreaId.toString())
-        metroAreaUrl = metroAreaUrl?.replace("param2", appProperties.songkickApiKey)
-        metroAreaUrl = metroAreaUrl?.replace("param3", startDate)
-        metroAreaUrl = metroAreaUrl?.replace("param4", endDate)
-        metroAreaUrl = metroAreaUrl?.replace("param5", gigDetailsForm.currentPage.toString())
+        var songkickMetroAreaUrl  = appProperties.songkickMetroAreaUrl
+        songkickMetroAreaUrl = songkickMetroAreaUrl!!.replace("metro_area_id", metroAreaId.toString())
+//        metroAreaUrl = metroAreaUrl?.replace("param2", appProperties.songkickApiKey)
+//        metroAreaUrl = metroAreaUrl?.replace("param3", startDate)
+//        metroAreaUrl = metroAreaUrl?.replace("param4", endDate)
+//        metroAreaUrl = metroAreaUrl?.replace("param5", gigDetailsForm.currentPage.toString())
+
+        val metroAreaUrl = songkickMetroAreaUrl.toHttpUrlOrNull()!!.newBuilder()
+                .addQueryParameter("apikey", appProperties.songkickApiKey)
+                .addQueryParameter("min_date", startDate)
+                .addQueryParameter("max_date", endDate)
+                .addQueryParameter("page", gigDetailsForm.currentPage.toString())
+                .addQueryParameter("per_page", gigDetailsForm.resultsPerPage.toString())
+                .build()
 
         val request = Request.Builder()
                 .get()
-                .url(metroAreaUrl!!)
+                .url(metroAreaUrl)
+                //.url(metroAreaUrl!!)
                 .build()
 
         var jsonAsString = ""
@@ -123,8 +133,8 @@ class GigService {
         if (jsonObj.resultsPage.totalEntries > 0) {
             gigDetailsForm.totalEntries = jsonObj.resultsPage.totalEntries
             gigDetailsForm.currentPage = jsonObj.resultsPage.page
-            gigDetailsForm.numberOfPages = gigDetailsForm.totalEntries / 20
-            var extraPage = gigDetailsForm.totalEntries % 20
+            gigDetailsForm.numberOfPages = gigDetailsForm.totalEntries / gigDetailsForm.resultsPerPage
+            var extraPage = gigDetailsForm.totalEntries % gigDetailsForm.resultsPerPage
             if (extraPage > 0) {
                 gigDetailsForm.numberOfPages = gigDetailsForm.numberOfPages + 1
             }

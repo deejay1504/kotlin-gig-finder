@@ -108,4 +108,10 @@
         $("#metroAreaId").val(0);
     }
 
+    // If we change the results per page reset current
+    // page number to 1 prior to starting a new search
+    function resetCurrentPage() {
+        $("#currentPage").val(1);
+    }
+
 //]]>

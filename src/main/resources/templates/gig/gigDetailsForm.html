@@ -18,6 +18,14 @@
                 <td class="start-date-msg"><input type="text" id="gigStartDate" th:field="*{gigStartDate}" /></td>
                 <td class="end-date-hdr"><label>End Date:</label></td>
                 <td class="end-date-msg"><input type="text" id="gigEndDate" th:field="*{gigEndDate}" /></td>
+                <td class="per-page-hdr"><label>Results Per Page:</label></td>
+                <td>
+                    <select th:id="resultsPerPage" th:field="*{resultsPerPage}" onchange="resetCurrentPage();">
+                        <option th:value="10">10</option>
+                        <option th:value="20">20</option>
+                        <option th:value="50">50</option>
+                    </select>
+                </td>
             </tr>
         </table>
 

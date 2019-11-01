@@ -1,20 +1,18 @@
 package org.springframework.gigfinder.gig
 
-import java.time.LocalDate
+data class GigDetails (
 
-class GigDetails () {
+    var artist: String    = "",
 
-    var artist    = ""
+    var venue: String     = "",
 
-    var venue     = ""
+    var location: String  = "",
 
-    var location  = ""
+    var startDate: String = "",
 
-    var startDate = ""
-
-    var songkickUrl = ""
+    var songkickUrl : String= "",
 
     // Start time could be null so define as String?
     var startTime: String? = ""
 
-}
+)
