@@ -92,10 +92,6 @@ class GigService {
         var endDate   = gigEndDate.substring(6) + "-" + gigEndDate.substring(3,5) + "-" + gigEndDate.substring(0,2)
         var songkickMetroAreaUrl  = appProperties.songkickMetroAreaUrl
         songkickMetroAreaUrl = songkickMetroAreaUrl!!.replace("metro_area_id", metroAreaId.toString())
-//        metroAreaUrl = metroAreaUrl?.replace("param2", appProperties.songkickApiKey)
-//        metroAreaUrl = metroAreaUrl?.replace("param3", startDate)
-//        metroAreaUrl = metroAreaUrl?.replace("param4", endDate)
-//        metroAreaUrl = metroAreaUrl?.replace("param5", gigDetailsForm.currentPage.toString())
 
         val metroAreaUrl = songkickMetroAreaUrl.toHttpUrlOrNull()!!.newBuilder()
                 .addQueryParameter("apikey", appProperties.songkickApiKey)
@@ -108,7 +104,6 @@ class GigService {
         val request = Request.Builder()
                 .get()
                 .url(metroAreaUrl)
-                //.url(metroAreaUrl!!)
                 .build()
 
         var jsonAsString = ""
@@ -122,8 +117,6 @@ class GigService {
             jsonAsString = response.body!!.string()
         }
 
-        println(request)
-        println(jsonAsString)
         var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
         var sortedGigList: List<GigDetails> = ArrayList<GigDetails>()
 

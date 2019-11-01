@@ -7096,20 +7096,23 @@ hr {
     width: 45px
 }
 .gig-hdr {
-    width: 140px
+    width: 100px
 }
 .gig-location {
-    width: 230px
+    width: 220px
 }
 .start-date-hdr {
-    width: 95px
+    width: 85px
 }
 .start-date-msg {
-    width: 230px
+    width: 225px
 }
 .end-date-hdr {
-    width: 95px
+    width: 80px
 }
 .end-date-msg {
     width: 200px
+}
+.per-page-hdr {
+    width: 140px
 }
