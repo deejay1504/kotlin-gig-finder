@@ -1568,19 +1568,19 @@ pre code {
   padding-left: 15px;
   padding-right: 15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1068px) {
   .container {
-    width: 750px;
+    width: 1050px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 1292px) {
   .container {
-    width: 970px;
+    width: 1270px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .container {
-    width: 1170px;
+    width: 1470px;
   }
 }
 .container-fluid {
@@ -7060,7 +7060,7 @@ hr {
 .dateHeading {
     float: left;
     padding-top: 30px;
-    padding-left: 140px;
+    padding-left: 280px;
     color: #FFFFFF;
 }
 .modal-header-warning {
@@ -7111,7 +7111,7 @@ hr {
     width: 80px
 }
 .end-date-msg {
-    width: 200px
+    width: 230px
 }
 .per-page-hdr {
     width: 140px

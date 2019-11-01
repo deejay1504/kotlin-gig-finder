@@ -74,6 +74,7 @@
                 showAlert(event, "modal-header-warning", "Start date cannot be greater than end date")
             }
         }
+        resetCurrentPage();
     }
 
     function reverseDate(dt) {
@@ -106,6 +107,7 @@
     // it to be looked up again for the new location
     function resetMetroAreaId() {
         $("#metroAreaId").val(0);
+        resetCurrentPage();
     }
 
     // If we change the results per page reset current
