@@ -116,4 +116,23 @@
         $("#currentPage").val(1);
     }
 
+    function getPreviousPage() {
+        var currentPage = parseInt($("#currentPage").val());
+        if (currentPage > 1) {
+            currentPage = currentPage - 1;
+        }
+        $("#currentPage").val(currentPage);
+        $("#gigDetailsForm").submit();
+    }
+
+    function getNextPage() {
+        var currentPage = parseInt($("#currentPage").val()) + 1;
+        var pageArray   = JSON.parse($("#maxPageNumber").val());
+        if (currentPage > pageArray.length ) {
+            currentPage = pageArray.length;
+        }
+        $("#currentPage").val(currentPage);
+        $("#gigDetailsForm").submit();
+    }
+
 //]]>

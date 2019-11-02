@@ -7116,3 +7116,10 @@ hr {
 .per-page-hdr {
     width: 140px
 }
+.pad-left-button {
+    padding-left: 8px;
+    padding-right: 7px;
+}
+.pad-right-button {
+    padding-left: 6px;
+}

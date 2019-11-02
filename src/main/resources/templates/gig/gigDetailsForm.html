@@ -53,6 +53,13 @@
             <div class="side-by-side">
                 <h3 th:text="Page"></h3>
             </div>
+            <div class="side-by-side">
+                <label>
+                    <span onclick="getPreviousPage();" aria-hidden="true"
+                          class="pad-left-button glyphicon glyphicon-circle-arrow-left">
+                    </span>
+                </label>
+            </div>
             <div class="pagination side-by-side"
                  th:each="pageNumber : ${gigDetailsForm.pageNumbers}">
                 <h2>
@@ -61,6 +68,13 @@
                        th:class="${pageNumber==gigDetailsForm.currentPage} ? active-page">
                     </a>
                 </h2>
+            </div>
+            <div class="side-by-side">
+                <label>
+                    <span onclick="getNextPage();" aria-hidden="true"
+                        class="pad-right-button glyphicon glyphicon-circle-arrow-right">
+                    </span>
+                </label>
             </div>
         </div>
 
@@ -95,6 +109,13 @@
                 <div class="side-by-side">
                     <h3 th:text="Page"></h3>
                 </div>
+                <div class="side-by-side">
+                    <label>
+                        <span onclick="getPreviousPage();" aria-hidden="true"
+                            class="pad-left-button glyphicon glyphicon-circle-arrow-left">
+                        </span>
+                    </label>
+                </div>
                 <div class="pagination side-by-side"
                      th:each="pageNumber : ${gigDetailsForm.pageNumbers}">
                     <h2>
@@ -103,6 +124,13 @@
                            th:class="${pageNumber==gigDetailsForm.currentPage} ? active-page">
                         </a>
                     </h2>
+                </div>
+                <div class="side-by-side">
+                    <label>
+                        <span onclick="getNextPage();" aria-hidden="true"
+                            class="pad-right-button glyphicon glyphicon-circle-arrow-right">
+                        </span>
+                    </label>
                 </div>
             </div>
             <div>
@@ -119,8 +147,9 @@
                 </div>
             </div>
     </div>
-    <input type="hidden" id="currentPage" name="currentPage" th:value="${gigDetailsForm.currentPage}" />
-    <input type="hidden" id="metroAreaId" name="metroAreaId" th:value="${gigDetailsForm.metroAreaId}" />
+    <input type="hidden" id="currentPage"   name="currentPage"   th:value="${gigDetailsForm.currentPage}" />
+    <input type="hidden" id="metroAreaId"   name="metroAreaId"   th:value="${gigDetailsForm.metroAreaId}" />
+    <input type="hidden" id="maxPageNumber" name="maxPageNumber" th:value="${gigDetailsForm.pageNumbers}" />
 </form>
 
 <div class="container">
