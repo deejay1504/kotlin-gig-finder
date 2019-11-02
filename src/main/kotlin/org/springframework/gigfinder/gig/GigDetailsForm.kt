@@ -33,7 +33,7 @@ class GigDetailsForm {
 
     var numberOfPages = 0
 
-    var gigList: List<GigDetails>? = null
+    var gigList: List<GigDetails>? = emptyList()
 
     var pageNumbers: List<Int> = emptyList()
 

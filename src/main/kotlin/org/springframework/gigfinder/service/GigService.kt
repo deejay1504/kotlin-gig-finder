@@ -2,6 +2,7 @@ package org.springframework.gigfinder.service
 
 import Json4Kotlin_Base
 import com.google.gson.Gson
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +14,6 @@ import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 
 @Service
@@ -28,10 +28,7 @@ class GigService {
 
     fun createGigDetails(): GigDetailsForm {
 
-        var gigDetailsForm = GigDetailsForm()
-        gigDetailsForm.gigList = ArrayList<GigDetails>()
-
-        return gigDetailsForm
+        return GigDetailsForm()
     }
 
     fun getGigs(gigDetailsForm: GigDetailsForm): GigDetailsForm {
@@ -136,7 +133,7 @@ class GigService {
 
                 var startTime = "No time specified"
                 if (!event.start.time.isNullOrBlank()) {
-                    startTime = event.start.time?.substring(0, 5)
+                    startTime = event.start.time.substring(0, 5)
                 }
                 val artistName = StringBuilder()
                 val artistNameArray = event.displayName.split(" ")

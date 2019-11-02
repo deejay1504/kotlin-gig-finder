@@ -1,5 +1,7 @@
 # Gig finder using Songkick API
 
+Displays gigs in a UK town or city for a date range.
+
 ## Technologies used
 
 * Language: Kotlin 1.3.31
@@ -12,10 +14,16 @@
 * Testing: Junit 5, Mockito
 * json2kotlin for generating Kotlin data model classes from a JSON object
 
-### To run on gradle command line
+### To build the project on gradle command line
 
 ```
 cd kotlin-gig-finder
+./gradlew clean build
+```
+
+### To run on gradle command line
+
+```
 ./gradlew bootRun
 ```
 
