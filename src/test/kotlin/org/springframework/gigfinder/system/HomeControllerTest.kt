@@ -53,8 +53,7 @@ class HomeControllerTest {
                 .andExpect(view().name(VIEWS_GIG_DETAILS_FORM))
     }
 
-    /**
-    @Test
+    @jdk.nashorn.internal.ir.annotations.Ignore
     fun shouldReturnGigListInForm() {
 
         mockMvc.perform(post("/gigfinder")
@@ -73,6 +72,5 @@ class HomeControllerTest {
                 .andExpect(model().attribute("gigDetailsForm", Matchers.hasProperty<Any>("gigEndDate", Matchers.`is`("Franklin"))))
                 .andExpect(view().name(VIEWS_GIG_DETAILS_FORM))
     }
-    */
 
 }
