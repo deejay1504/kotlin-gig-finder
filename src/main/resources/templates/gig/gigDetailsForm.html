@@ -13,14 +13,25 @@
         <table>
             <tr>
                 <td class="gig-hdr"><label>Gig location:</label></td>
-                <td class="gig-location"><input id="gigLocation" th:field="*{gigLocation}" onchange="resetMetroAreaId();"/></td>
+                <td class="gig-location">
+                    <input id="gigLocation" th:field="*{gigLocation}" onchange="resetMetroAreaId();"
+                        data-toggle="tooltip" data-placement="bottom" title="Enter a UK based location"/>
+                </td>
                 <td class="start-date-hdr"><label>Start Date:</label></td>
-                <td class="start-date-msg"><input type="text" id="gigStartDate" th:field="*{gigStartDate}" /></td>
+                <td class="start-date-msg">
+                    <input type="text" id="gigStartDate" th:field="*{gigStartDate}"
+                        data-toggle="tooltip" data-placement="bottom" title="Enter a start date for the gig"/>
+                </td>
                 <td class="end-date-hdr"><label>End Date:</label></td>
-                <td class="end-date-msg"><input type="text" id="gigEndDate" th:field="*{gigEndDate}" /></td>
+                <td class="end-date-msg">
+                    <input type="text" id="gigEndDate" th:field="*{gigEndDate}"
+                        data-toggle="tooltip" data-placement="bottom"
+                           title="Enter an end date for the gig. To find gigs on one day, make end date the same as start date"/>
+                </td>
                 <td class="per-page-hdr"><label>Results Per Page:</label></td>
                 <td>
-                    <select th:id="resultsPerPage" th:field="*{resultsPerPage}" onchange="resetCurrentPage();">
+                    <select th:id="resultsPerPage" th:field="*{resultsPerPage}" onchange="resetCurrentPage();"
+                          data-toggle="tooltip" data-placement="bottom" title="How many gigs to display on a page">
                         <option th:value="10">10</option>
                         <option th:value="20">20</option>
                         <option th:value="50">50</option>
@@ -56,7 +67,8 @@
             <div class="side-by-side">
                 <label>
                     <span onclick="getPreviousPage();" aria-hidden="true"
-                          class="pad-left-button glyphicon glyphicon-circle-arrow-left">
+                          class="pad-left-button glyphicon glyphicon-circle-arrow-left"
+                          data-toggle="tooltip" data-placement="bottom" title="Display the previous page of gigs">
                     </span>
                 </label>
             </div>
@@ -72,7 +84,8 @@
             <div class="side-by-side">
                 <label>
                     <span onclick="getNextPage();" aria-hidden="true"
-                        class="pad-right-button glyphicon glyphicon-circle-arrow-right">
+                        class="pad-right-button glyphicon glyphicon-circle-arrow-right"
+                        data-toggle="tooltip" data-placement="bottom" title="Display the next page of gigs">
                     </span>
                 </label>
             </div>
@@ -112,7 +125,8 @@
                 <div class="side-by-side">
                     <label>
                         <span onclick="getPreviousPage();" aria-hidden="true"
-                            class="pad-left-button glyphicon glyphicon-circle-arrow-left">
+                            class="pad-left-button glyphicon glyphicon-circle-arrow-left"
+                            data-toggle="tooltip" data-placement="bottom" title="Display the previous page of gigs">
                         </span>
                     </label>
                 </div>
@@ -128,7 +142,8 @@
                 <div class="side-by-side">
                     <label>
                         <span onclick="getNextPage();" aria-hidden="true"
-                            class="pad-right-button glyphicon glyphicon-circle-arrow-right">
+                            class="pad-right-button glyphicon glyphicon-circle-arrow-right"
+                            data-toggle="tooltip" data-placement="bottom" title="Display the next page of gigs">
                         </span>
                     </label>
                 </div>

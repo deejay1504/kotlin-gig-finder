@@ -4,6 +4,8 @@
     var monthlist = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
     window.onload = function() {
+        $("[data-toggle='tooltip']").tooltip();
+
         var greeting =  getTodaysDate() + ' - ' + getGreeting() + "!";
         $("#dateHeading").text(greeting);
 

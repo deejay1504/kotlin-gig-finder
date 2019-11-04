@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import javax.validation.Valid
 
 @Controller
 class HomeController(private val gigService: GigService) {
@@ -21,7 +22,8 @@ class HomeController(private val gigService: GigService) {
     }
 
     @PostMapping("/gigfinder")
-    fun getGigs(gigDetailsForm: GigDetailsForm, result: BindingResult, model: MutableMap<String, Any>): String {
+    fun getGigs(@Valid gigDetailsForm: GigDetailsForm, result: BindingResult, model: MutableMap<String, Any>): String {
+//    fun getGigs(gigDetailsForm: GigDetailsForm, model: MutableMap<String, Any>): String {
 
         model["gigDetailsForm"] = gigService.getGigs(gigDetailsForm)
 

@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 class HomeControllerTest {
 
     @Autowired
-    private lateinit var mockMvc: MockMvc
+    lateinit var mockMvc: MockMvc
 
     @MockBean
     private lateinit var gigService: GigService
@@ -42,6 +42,7 @@ class HomeControllerTest {
         gigDetailsForm.gigStartDate = "02-11-2019"
         gigDetailsForm.gigEndDate = "02-11-2019"
         gigDetailsForm.gigList = ArrayList<GigDetails>()
+        gigDetailsForm.pageNumbers = ArrayList<Int>()
         given(gigService.createGigDetails()).willReturn(gigDetailsForm)
     }
 
@@ -53,8 +54,11 @@ class HomeControllerTest {
                 .andExpect(view().name(VIEWS_GIG_DETAILS_FORM))
     }
 
-    @jdk.nashorn.internal.ir.annotations.Ignore
+    /**
+    @Test
     fun shouldReturnGigListInForm() {
+
+        given(gigService.getGigs(gigDetailsForm)).willReturn(gigDetailsForm)
 
         mockMvc.perform(post("/gigfinder")
                         .param("totalEntries", "1")
@@ -65,6 +69,8 @@ class HomeControllerTest {
                         .param("currentPage", "02-11-2019")
                         .param("resultsPerPage", "20")
                         .param("numberOfPages", "0")
+//                        .param("gigList", "")
+//                        .param("pageNumbers", "")
                 )
                 .andExpect(status().isOk)
                 .andExpect(model().attributeExists("gigDetailsForm"))
@@ -72,5 +78,6 @@ class HomeControllerTest {
                 .andExpect(model().attribute("gigDetailsForm", Matchers.hasProperty<Any>("gigEndDate", Matchers.`is`("Franklin"))))
                 .andExpect(view().name(VIEWS_GIG_DETAILS_FORM))
     }
+*/
 
 }
