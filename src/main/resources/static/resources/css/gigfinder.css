@@ -7123,3 +7123,9 @@ hr {
 .pad-right-button {
     padding-left: 6px;
 }
+.gig-today {
+    color: #E74C3C;
+}
+.gig-not-today {
+    color: #000000;
+}

@@ -116,6 +116,7 @@
     // page number to 1 prior to starting a new search
     function resetCurrentPage() {
         $("#currentPage").val(1);
+        $("#gigDetailsForm").submit();
     }
 
     function getPreviousPage() {

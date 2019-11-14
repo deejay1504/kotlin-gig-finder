@@ -83,6 +83,7 @@ class GigService {
 
 
     fun getGigsFromMetroAreaId(metroAreaId: Int, gigDetailsForm: GigDetailsForm): GigDetailsForm {
+        var todaysDate = java.time.LocalDate.now().toString();
         var gigStartDate = gigDetailsForm.gigStartDate
         var gigEndDate = gigDetailsForm.gigEndDate
         var startDate = gigStartDate.substring(6) + "-" + gigStartDate.substring(3,5) + "-" + gigStartDate.substring(0,2)
@@ -148,6 +149,7 @@ class GigService {
                 gigDetails.startDate = LocalDate.parse(event.start.date).format(df).toString()
                 gigDetails.startTime = startTime
                 gigDetails.songkickUrl = event.uri
+                gigDetails.gigToday = if (todaysDate.equals(event.start.date)) true else false
 
                 gigList.add(gigDetails)
             }

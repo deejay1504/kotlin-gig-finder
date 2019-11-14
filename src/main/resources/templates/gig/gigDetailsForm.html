@@ -105,9 +105,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="gig, itemStat : *{gigList}">
+                <tr th:each="gig, itemStat : *{gigList}" th:classappend="*{gigList[__${itemStat.index}__].gigToday} ? gig-today : gig-not-today">
                     <td>
-                        <a class="artist-field" th:href="*{gigList[__${itemStat.index}__].songkickUrl}"
+                        <a class="artist-field" th:classappend="*{gigList[__${itemStat.index}__].gigToday} ? gig-today : gig-not-today"
+                           th:href="*{gigList[__${itemStat.index}__].songkickUrl}"
                            th:text="*{gigList[__${itemStat.index}__].artist}" target="_blank">
                         </a>
                     </td>
