@@ -68,12 +68,14 @@
 
         if (sDate == '' || eDate == '') {
             showAlert(event, "modal-header-error", "Date cannot be empty")
+            return false;
         } else {
             var startDate = Date.parse(revStartDate);
             var endDate   = Date.parse(revEndDate);
 
             if (startDate > endDate) {
                 showAlert(event, "modal-header-warning", "Start date cannot be greater than end date")
+                return false;
             }
         }
         resetCurrentPage();
