@@ -14,7 +14,6 @@ data class GigDetails (
 
     var gigToday : Boolean   = false,
 
-    // Start time could be null so define as String?
-    var startTime: String?   = ""
+    var startTime: String    = "No time specified "
 
 )

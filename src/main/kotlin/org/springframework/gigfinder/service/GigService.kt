@@ -132,10 +132,6 @@ class GigService {
             for (event in jsonObj.resultsPage.results.event) {
                 var gigDetails: GigDetails = GigDetails()
 
-                var startTime = "No time specified"
-                if (!event.start.time.isNullOrBlank()) {
-                    startTime = event.start.time.substring(0, 5)
-                }
                 val artistName = StringBuilder()
                 val artistNameArray = event.displayName.split(" ")
                 var wordIndex = artistNameArray.indexOf("at") - 1
@@ -147,9 +143,11 @@ class GigService {
                 gigDetails.venue = event.venue.displayName
                 gigDetails.location = event.location.city
                 gigDetails.startDate = LocalDate.parse(event.start.date).format(df).toString()
-                gigDetails.startTime = startTime
                 gigDetails.songkickUrl = event.uri
                 gigDetails.gigToday = if (todaysDate.equals(event.start.date)) true else false
+                if (!event.start.time.isNullOrBlank()) {
+                    gigDetails.startTime = event.start.time.substring(0, 5)
+                }
 
                 gigList.add(gigDetails)
             }
