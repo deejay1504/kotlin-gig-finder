@@ -84,10 +84,8 @@ class GigService {
 
     fun getGigsFromMetroAreaId(metroAreaId: Int, gigDetailsForm: GigDetailsForm): GigDetailsForm {
         var todaysDate = java.time.LocalDate.now().toString();
-        var gigStartDate = gigDetailsForm.gigStartDate
-        var gigEndDate = gigDetailsForm.gigEndDate
-        var startDate = gigStartDate.substring(6) + "-" + gigStartDate.substring(3,5) + "-" + gigStartDate.substring(0,2)
-        var endDate   = gigEndDate.substring(6) + "-" + gigEndDate.substring(3,5) + "-" + gigEndDate.substring(0,2)
+        var startDate= getDate(gigDetailsForm.gigStartDate)
+        var endDate  = getDate(gigDetailsForm.gigEndDate)
         var songkickMetroAreaUrl  = appProperties.songkickMetroAreaUrl
         songkickMetroAreaUrl = songkickMetroAreaUrl!!.replace("metro_area_id", metroAreaId.toString())
 
@@ -165,6 +163,13 @@ class GigService {
 
         return gigDetailsForm
 
+    }
+
+    fun getDate(dateIn: String): String {
+        if (dateIn.length == 10) {
+            return dateIn.substring(6) + "-" + dateIn.substring(3,5) + "-" + dateIn.substring(0,2)
+        }
+        return "1900-01-01"
     }
 
 }
