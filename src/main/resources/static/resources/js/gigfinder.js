@@ -107,9 +107,10 @@
 
     // If we change location, set metro area id to 0 to force
     // it to be looked up again for the new location
+    // also set current page to one so the search starts correctly
     function resetMetroAreaId() {
         $("#metroAreaId").val(0);
-        resetCurrentPage();
+        $("#currentPage").val(1);
     }
 
     // If we change the results per page reset current
