@@ -128,7 +128,7 @@ class GigService {
                 gigDetailsForm.numberOfPages = gigDetailsForm.numberOfPages + 1
             }
             for (event in jsonObj.resultsPage.results.event) {
-                var gigDetails: GigDetails = GigDetails()
+                var gigDetails = GigDetails()
 
                 val artistName = StringBuilder()
                 val artistNameArray = event.displayName.split(" ")
@@ -140,6 +140,7 @@ class GigService {
                 gigDetails.artist = artistName.toString().trim()
                 gigDetails.venue = event.venue.displayName
                 gigDetails.location = event.location.city
+                gigDetails.dateTime = event.start.date
                 gigDetails.startDate = LocalDate.parse(event.start.date).format(df).toString()
                 gigDetails.songkickUrl = event.uri
                 gigDetails.gigToday = if (todaysDate.equals(event.start.date)) true else false
@@ -155,7 +156,7 @@ class GigService {
             }
             gigDetailsForm.pageNumbers = pageNumbers
 
-            sortedGigList = gigList.sortedWith(compareBy({it.startDate}, {it.artist}))
+            sortedGigList = gigList.sortedWith(compareBy({it.dateTime}, {it.artist}))
         }
 
         gigDetailsForm.gigList = sortedGigList

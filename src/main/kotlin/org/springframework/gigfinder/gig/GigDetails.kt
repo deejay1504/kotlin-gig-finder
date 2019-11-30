@@ -2,18 +2,20 @@ package org.springframework.gigfinder.gig
 
 data class GigDetails (
 
-    var artist: String       = "",
+    var artist: String      = "",
 
-    var venue: String        = "",
+    var venue: String       = "",
 
-    var location: String     = "",
+    var location: String    = "",
 
-    var startDate: String    = "",
+    var startDate: String   = "",
 
-    var songkickUrl : String = "",
+    var dateTime: String    = "",
 
-    var gigToday : Boolean   = false,
+    var songkickUrl: String = "",
 
-    var startTime: String    = "No time specified "
+    var gigToday: Boolean   = false,
+
+    var startTime: String   = "No time specified "
 
 )
