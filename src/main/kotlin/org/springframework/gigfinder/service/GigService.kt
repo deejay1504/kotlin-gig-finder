@@ -39,9 +39,7 @@ class GigService {
             metroAreaId = getMetroAreaIdFromCurrentLocation(gigDetailsForm.gigLocation)
         }
 
-        var returnedGigDetailsForm = getGigsFromMetroAreaId(metroAreaId, gigDetailsForm)
-
-        return returnedGigDetailsForm
+        return getGigsFromMetroAreaId(metroAreaId, gigDetailsForm)
 
     }
 
@@ -83,9 +81,9 @@ class GigService {
 
 
     fun getGigsFromMetroAreaId(metroAreaId: Int, gigDetailsForm: GigDetailsForm): GigDetailsForm {
-        var todaysDate = java.time.LocalDate.now().toString();
-        var startDate= getDate(gigDetailsForm.gigStartDate)
-        var endDate  = getDate(gigDetailsForm.gigEndDate)
+        val todaysDate = LocalDate.now().toString()
+        val startDate = getDate(gigDetailsForm.gigStartDate)
+        val endDate = getDate(gigDetailsForm.gigEndDate)
         var songkickMetroAreaUrl  = appProperties.songkickMetroAreaUrl
         songkickMetroAreaUrl = songkickMetroAreaUrl!!.replace("metro_area_id", metroAreaId.toString())
 
@@ -113,8 +111,8 @@ class GigService {
             jsonAsString = response.body!!.string()
         }
 
-        var gigList: ArrayList<GigDetails> = ArrayList<GigDetails>()
-        var sortedGigList: List<GigDetails> = ArrayList<GigDetails>()
+        val gigList: ArrayList<GigDetails> = ArrayList()
+        var sortedGigList: List<GigDetails> = ArrayList()
 
         val jsonObj = Gson().fromJson(jsonAsString, Json4Kotlin_Base::class.java)
         val df = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
@@ -123,16 +121,16 @@ class GigService {
             gigDetailsForm.totalEntries = jsonObj.resultsPage.totalEntries
             gigDetailsForm.currentPage = jsonObj.resultsPage.page
             gigDetailsForm.numberOfPages = gigDetailsForm.totalEntries / gigDetailsForm.resultsPerPage
-            var extraPage = gigDetailsForm.totalEntries % gigDetailsForm.resultsPerPage
+            val extraPage = gigDetailsForm.totalEntries % gigDetailsForm.resultsPerPage
             if (extraPage > 0) {
                 gigDetailsForm.numberOfPages = gigDetailsForm.numberOfPages + 1
             }
             for (event in jsonObj.resultsPage.results.event) {
-                var gigDetails = GigDetails()
+                val gigDetails = GigDetails()
 
                 val artistName = StringBuilder()
                 val artistNameArray = event.displayName.split(" ")
-                var wordIndex = artistNameArray.indexOf("at") - 1
+                val wordIndex = artistNameArray.indexOf("at") - 1
                 for (i in 0..wordIndex) {
                     artistName.append(artistNameArray[i]).append(" ")
                 }
@@ -143,14 +141,14 @@ class GigService {
                 gigDetails.dateTime = event.start.date
                 gigDetails.startDate = LocalDate.parse(event.start.date).format(df).toString()
                 gigDetails.songkickUrl = event.uri
-                gigDetails.gigToday = if (todaysDate.equals(event.start.date)) true else false
+                gigDetails.gigToday = todaysDate.equals(event.start.date)
                 if (!event.start.time.isNullOrBlank()) {
                     gigDetails.startTime = event.start.time.substring(0, 5)
                 }
 
                 gigList.add(gigDetails)
             }
-            var pageNumbers: ArrayList<Int> = ArrayList<Int>()
+            val pageNumbers: ArrayList<Int> = ArrayList()
             for (pageNo in 1 ..gigDetailsForm.numberOfPages) {
                 pageNumbers.add(pageNo)
             }
